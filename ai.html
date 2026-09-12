@@ -143,6 +143,18 @@
         svg {
                 margin-right: 10px;
         }
+
+        .back {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(45deg, rgba(171, 0, 214, 0.842), rgba(255, 25, 236, 0.842));
+            box-shadow: 0 0 20px 5px rgba(143, 6, 131, 0.3);
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all ease;
+        }
     </style>
 </head>
 
@@ -175,6 +187,8 @@
             </button>
         </div>
     </div>
+
+    <button class="back" onclick="window.location.replace('home.html')">Back</button>
 
     <script>
         const FLUX_API_URL =
