@@ -1,0 +1,182 @@
+<html>
+    <head>
+        <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+        <title>Login</title>
+        <link rel="preload" as="image" href="background.png">
+
+        <style>
+            body {
+                background-color: #080612;
+                background-image: 
+                    radial-gradient(circle at 30% 30%, rgba(237, 58, 228, 0.18) 0%, transparent 40%),
+                    radial-gradient(circle at 60% 85%, rgba(23, 65, 182, 0.18) 0%, transparent 40%);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                min-height: 100vh;
+                padding-top: 70px;
+                overflow: hidden;
+            }
+
+            .usercontainer {
+                position: relative;
+            }
+
+            .passcontainer {
+                position: relative;
+            }
+
+            .logtxt {
+                font-size: 16.5px
+            }
+
+            @view-transition {
+                navigation: auto;
+            }
+
+            .container {
+                background-color: rgba(255, 255, 255, 0.07);
+                 backdrop-filter: blur(7px);
+                -webkit-backdrop-filter: blur(7px); 
+                display: flex;
+                flex-direction: column; 
+                min-height: -100vh;
+                row-gap: 20px;
+                padding: 30px 60px;
+                border: 2px solid rgba(255, 255, 255, 0.2);
+                border-radius: 10px;
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.2)
+            }
+
+            .usercontainer i {
+                position: absolute;
+                right: 15px;
+                top: 50%;
+                transform: translateY(-50%);
+                color: white;
+                font-size: 20px;
+            }
+
+             .passcontainer i {
+                position: absolute;
+                right: 15px;
+                top: 50%;
+                transform: translateY(-50%);
+                color: white;
+                font-size: 20px;
+            }
+
+            .text {
+                background: transparent;
+                border: 2px solid rgba(255, 255, 255, 0.2);
+                padding: 10px 45px 10px 20px;
+                border-radius: 18px;
+                color: white;
+                color-scheme: dark;
+            }
+
+            .text:focus{
+                outline: none !important;
+            }
+
+            .login {
+                background-color: white;
+                color: black;
+                padding: 10px 50px;
+                border: 2px solid transparent;
+                border-radius: 20px;
+                cursor: pointer;
+            }
+
+            .label {
+                font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+                color: white;
+                font-size: 20px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .label a {
+                text-decoration: none;
+                color: rgb(202, 88, 224);
+                font-weight: 800;
+                font-size: medium;
+                cursor: pointer;
+            }
+
+            .text::placeholder{
+                color: white;
+            }
+
+            .container .welclabel {
+                font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+                color: rgb(255, 255, 255);
+                font-size: 30px;
+                font-weight: bold;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .login:hover {
+                background-color: transparent;
+                border: 2px solid rgba(255, 255, 255, 0.2);
+                color: white;
+            }
+
+            img {
+                width: 25%;
+                height: auto
+            }
+
+        </style>
+    </head>
+    <body>
+        <!-- <img src="SKILLBLOOM.png" alt=""SkillBLOOM - A place for You!> -->
+        <div class="container">
+            <label class="welclabel">Hello, Friend</label>
+
+            <div class="usercontainer">
+            <input type="text" id="username" placeholder="Username" class="text"><i class="bx bx-user"></i></div>
+
+            <div class="passcontainer">
+            <input type="password" id="password" placeholder="Password" class="text"><i class="bx bx-lock"></i><br></div>
+            
+            <button class="login" id="login" onclick="this.innerText='Logging In...'"><span class="logtxt">Login</span></button>
+            <div class="sign">
+            <label class="label">Don't have an account? <a onclick="window.location.href='signin.html'">Sign Up</a></label></div>
+        </div>
+
+        <script>
+            const loginBtn = document.getElementById('login');
+
+            loginBtn.addEventListener("click", async () => {
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+
+                const response = await fetch("/login", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        username: username,
+                        password: password,
+                    })
+                })
+
+                const result = await response.json();
+
+                if (result.success) {
+                    localStorage.setItem("username", username);
+                    localStorage.setItem("userId", result.userId)
+                    window.location.replace("home.html");
+                    console.log("STORED USERNAME:", localStorage.getItem("username"));
+                } else {
+                    alert(result);
+                }})
+        </script>
+    </body>
+</html>

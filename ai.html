@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flux AI</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            margin: 0;
+            padding: 40px;
+            background-color: #080612;
+            background-image:
+                radial-gradient(circle at 15% 20%, rgba(124, 58, 237, 0.18) 0%, transparent 40%),
+                radial-gradient(circle at 85% 75%, rgba(6, 182, 212, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(15, 23, 42, 0.5) 0%, transparent 100%);
+            min-height: 100vh;
+        }
+
+        .flux-container {
+            width: 50%;
+            margin: auto;
+            background: rgba(247, 158, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 
+                0 4px 15px 0 4px 6px -1px rgba(0, 0, 0, 0.8), 
+                0 20px 25px -5px rgba(0, 0, 0, 0.6);
+        }
+
+        h1 {
+            margin-top: 0;
+        }
+
+        @keyframes messageSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(12px) scale(0.98);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        #chat {
+            height: 350px;
+            overflow-y: auto;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .user-message {
+            margin: 10px 0;
+            color: white;
+            font-size: 16px;
+            background-color: rgba(204, 0, 255, 0.842);
+            padding: 20px;
+            border-radius: 20px 20px 0px 20px;
+            animation: messageSlideIn 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end; 
+            margin-left: auto;    
+            width: fit-content; 
+            max-width: 85%;
+        }
+
+        .ai-message {
+            margin: 10px 0;
+            color: white;
+            font-size: 16px;
+            background-color: rgba(255, 25, 236, 0.842);
+            padding: 20px;
+            border-radius: 20px 20px 20px 0px;
+            animation: messageSlideIn 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end; 
+            margin-right: auto;      
+            width: fit-content; 
+            max-width: 85%;
+        }
+
+        .input-area {
+            display: flex;
+            gap: 10px;
+        }
+
+        #message {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+            background-color: transparent;
+            color: rgba(255, 138, 245, 0.842)
+        }
+
+        #message:focus {
+            outline: none
+        }
+
+        #message::placeholder {
+            color: white;
+        }
+
+        button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(45deg, rgba(171, 0, 214, 0.842), rgba(255, 25, 236, 0.842));
+            box-shadow: 0 0 20px 5px rgba(143, 6, 131, 0.3);
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all ease;
+        }
+
+        #sendButton {
+            transition: box-shadow 0.3s ease-out;
+        }
+
+        button:hover {
+            box-shadow: 0 0 20px 5px rgba(143, 6, 131, 0.7);
+        }
+
+        button:disabled {
+            background: #999;
+            cursor: not-allowed;
+        }
+
+        hr {
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        svg {
+                margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="flux-container">
+        <h1 style="color: white;"><span><svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24" >
+<path d="m21.45 11.11-3-1.5-2.68-1.34-.03-.03-1.34-2.68-1.5-3c-.34-.68-1.45-.68-1.79 0l-1.5 3-1.34 2.68-.03.03-2.68 1.34-3 1.5c-.34.17-.55.52-.55.89s.21.72.55.89l3 1.5 2.68 1.34.03.03 1.34 2.68 1.5 3c.17.34.52.55.89.55s.72-.21.89-.55l1.5-3 1.34-2.68.03-.03 2.68-1.34 3-1.5c.34-.17.55-.52.55-.89s-.21-.72-.55-.89Z"></path>
+</svg></span>Flux AI</h1>
+        <hr>
+
+        <div id="chat">
+            <p class="ai-message">
+                Hey! I'm Flux AI. How can I help you today?
+            </p>
+        </div>
+
+        <div class="input-area">
+            <input
+                id="message"
+                type="text"
+                placeholder="Ask Flux AI..."
+                onkeydown="handleEnter(event)"
+            >
+
+            <button
+                id="sendButton"
+                onclick="sendMessage()"
+            >
+                Send
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const FLUX_API_URL =
+            "https://sharp-physicians-villa-fairly.trycloudflare.com/chat";
+
+        async function sendMessage() {
+            const input = document.getElementById("message");
+            const chat = document.getElementById("chat");
+            const sendButton = document.getElementById("sendButton");
+
+            const message = input.value.trim();
+
+            if (!message) {
+                return;
+            }
+
+            const userMessage = document.createElement("p");
+            userMessage.className = "user-message";;
+            userMessage.appendChild(
+                document.createTextNode(message)
+            );
+            chat.appendChild(userMessage);
+
+            input.value = "";
+
+            const aiMessage = document.createElement("p");
+            aiMessage.className = "ai-message";
+            aiMessage.innerHTML = "Thinking...";
+            chat.appendChild(aiMessage);
+
+            chat.scrollTop = chat.scrollHeight;
+            sendButton.disabled = true;
+
+            try {
+                const response = await fetch(
+                    FLUX_API_URL,
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            message: message
+                        })
+                    }
+                );
+
+                if (!response.ok) {
+                    throw new Error(
+                        "Server returned HTTP " +
+                        response.status
+                    );
+                }
+
+                const data = await response.json();
+                aiMessage.appendChild(
+                    document.createTextNode(data.response)
+                );
+            } catch (error) {
+                console.error(
+                    "Flux AI Error:",
+                    error
+                );
+
+                aiMessage.innerHTML =
+                    "Sorry, I couldn't connect " +
+                    "to the AI right now.";
+            } finally {
+                sendButton.disabled = false;
+                chat.scrollTop = chat.scrollHeight;
+                input.focus();
+            }
+        }
+
+        function handleEnter(event) {
+            if (event.key === "Enter") {
+                sendMessage();
+            }
+        }
+    </script>
+</body>
+</html>

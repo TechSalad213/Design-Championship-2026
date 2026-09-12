@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+        <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+        <title>SkillBloom | Design Championship 2026</title>
+
+        <style>
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+                font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            }
+
+            body {
+                background-color: #080612;
+                background-image: 
+                    radial-gradient(circle at 15% 20%, rgba(124, 58, 237, 0.18) 0%, transparent 40%),
+                    radial-gradient(circle at 85% 75%, rgba(6, 182, 212, 0.15) 0%, transparent 40%),
+                    radial-gradient(circle at 50% 50%, rgba(15, 23, 42, 0.5) 0%, transparent 100%);
+                min-height: 100vh;
+                width: 100%;
+                overflow: scroll;
+                position: relative;
+            }
+
+            @view-transition {
+                navigation: auto;
+            }
+
+            .topBar {
+                width: 100%;
+                height: 64px;
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                background: rgba(13, 10, 25, 0.65);
+                border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+                position: fixed;
+                top: 0;
+                left: 0;
+                display: flex;
+                align-items: center;
+                z-index: 100;
+                padding: 0 40px;
+            }
+
+            .brand {
+                font-weight: 700;
+                font-size: 18px;
+                color: #ffffff;
+                padding-left: 0;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                letter-spacing: -0.2px;
+            }
+
+            .brand img {
+                width: 28px;
+                height: 28px;
+                object-fit: contain;
+            }
+
+            .topBar .home, .courses, .mycourses, .contributions {
+                margin-left: 12px;
+                text-decoration: none;
+                color: rgba(255, 255, 255, 0.75);
+                font-size: 13px;
+                font-weight: 500;
+                background-color: rgba(255, 255, 255, 0.03);
+                border: 1px solid rgba(255, 255, 255, 0.08);
+                border-radius: 20px;
+                padding: 7px 16px;
+                transition: all 0.2s ease-out;
+            }
+
+            .topBar .home:hover, .courses:hover, .mycourses:hover, .contributions:hover {
+                background-color: rgba(255, 255, 255, 0.1);
+                color: #ffffff;
+                border-color: rgba(255, 255, 255, 0.2);
+                transform: translateY(-1px);
+            }
+
+            .account {
+                margin-left: auto;
+                margin-right: 0;
+                position: relative;
+            }
+
+            .account button {
+                background: linear-gradient(135deg, rgba(124, 58, 237, 0.6) 0%, rgba(6, 182, 212, 0.6) 100%);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                border-radius: 20px;
+                padding: 8px 20px;
+                font-size: 13px;
+                font-weight: 600;
+                transition: all 0.2s ease;
+                color: #ffffff;
+                cursor: pointer;
+                box-shadow: 0 4px 15px rgba(124, 58, 237, 0.25);
+            }
+
+            .account button:hover {
+                opacity: 0.95;
+                transform: translateY(-1px);
+                box-shadow: 0 6px 20px rgba(124, 58, 237, 0.35);
+            }
+
+            .account button:focus {
+                outline: none;
+            }
+
+            .account button:active {
+                transform: scale(0.98);
+            }
+
+            @view-transition {
+                navigation: auto;
+            }
+
+            .account-menu {
+                background: rgba(18, 14, 32, 0.95);
+                backdrop-filter: blur(24px);
+                -webkit-backdrop-filter: blur(24px);
+                padding: 8px;
+                display: none;
+                right: 0;
+                top: 48px;
+                flex-direction: column;
+                position: absolute;
+                gap: 4px;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 14px;
+                min-width: 170px;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+                z-index: 101;
+            }
+
+            .account-menu a {
+                background-color: transparent;
+                padding: 10px 14px;
+                text-decoration: none;
+                font-size: 13px;
+                font-weight: 500;
+                color: rgba(255, 255, 255, 0.8);
+                border: none;
+                border-radius: 8px;
+                transition: all 0.2s ease;
+            }
+
+            .account-menu a:hover {
+                background-color: rgba(255, 255, 255, 0.08);
+                color: #ffffff;
+            }
+
+            .account-menu button {
+                background-color: rgba(239, 68, 68, 0.15);
+                border: 1px solid rgba(239, 68, 68, 0.2);
+                border-radius: 8px;
+                padding: 8px 14px;
+                margin-top: 4px;
+                width: 100%;
+                font-size: 12px;
+                box-shadow: none;
+            }
+
+            .account-menu button:hover {
+                background-color: rgba(239, 68, 68, 0.3);
+                box-shadow: none;
+            }
+
+            .upload {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                padding: 12px 24px;
+                font-size: 16px;
+                font-weight: 600;
+                color: #ffffff;
+                background-color: #4f46e5;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                transition: background-color 0.2s ease, transform 0.1s ease;
+              }
+
+            .upload:hover {
+                background-color: #4338ca;
+              }
+
+            .upload:active {
+                transform: scale(0.98);
+              }
+
+             html::-webkit-scrollbar, 
+            body::-webkit-scrollbar {
+                width: 12px;
+            }
+
+            html::-webkit-scrollbar-track, 
+            body::-webkit-scrollbar-track {
+                background: transparent;
+            }
+
+            html::-webkit-scrollbar-thumb, 
+            body::-webkit-scrollbar-thumb {
+                background:  rgba(60, 63, 146, 0.3);
+                border-radius: 2px;
+                border: 3px solid  transparent;
+                transition: background 0.7s ease-out;
+            }
+
+            html::-webkit-scrollbar-thumb:hover, 
+            body::-webkit-scrollbar-thumb:hover {
+                background: rgba(101, 106, 248, 0.3);
+            }
+
+            #skillsContainer {
+                display: grid;
+                gap: 25px;
+                width: 100%;
+                grid-template-columns: repeat(autofill, minmax(280px, 1fr));
+                padding: 90px 40px 40px;
+            }
+
+            #skillsContainer div {
+                padding: 25px;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 18px;
+                background: rgba(255, 255, 255, 0.05);
+            }
+
+            #courseName {
+                font-size: 42px;
+                font-weight: 800;
+                background: linear-gradient(45deg, #8258ff, #ee22c2);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                margin-bottom: 12px;
+            }
+
+            #courseHeading {
+                font-size: 20px;
+                font-weight: 600;
+                margin-bottom: 25px;
+            }
+
+            #topic,
+            #learningTime,
+            #itemsNeeded,
+            #category {
+                display: inline-block;
+                padding: 8px 14px;
+                margin: 5px;
+                border: 1px solid rgba(255,255,255,0.1);
+                border-radius: 20px;
+                background: rgba(255,255,255,0.06);
+                font-size: 13px;
+            }
+
+            #courseDesc {
+                margin: 25px auto;
+                max-width: 700px;
+                line-height: 1.7;
+                color: rgba(255,255,255,0.65);
+            }
+
+            #courseInfo hr {
+                border: none;
+                height: 1px;
+                width: 100%;
+                margin-top: 40px;
+                background: rgba(255,255,255,0.1);
+            }
+
+            hr {
+                border: none;
+                height: 1px;
+                width: 100%;
+                margin-top: 40px;
+                background: rgba(255,255,255,0.1);
+            }
+
+            #courseInfo {
+                max-width: 900px;
+                margin: 0 auto;
+                padding: 120px 30px 40px;
+                text-align: center;
+                color: white;
+            }
+
+            #stageDetails {
+                text-align: center;
+                padding-top: 120px;
+                color: white;
+                margin-top: -130px;
+            }
+
+            .stageText {
+                color: white;
+                padding: 10px;
+            }
+
+            #stageAttchLink {
+                text-decoration: none;
+                background: rgba(255, 255, 255, 0.04);
+                backdrop-filter: blur(16px);
+                -webkit-backdrop-filter: blur(16px);
+                border: 1px solid rgba(255, 255, 255, 0.12);
+                padding: 16px 52px 16px 24px;
+                border-radius: 30px;
+                color: #ffffff;
+                font-size: 15px;
+            }
+
+            #backBTN {
+                background-color: transparent;
+                font-size: 16px;
+                color: white;
+                font-weight: bolder;
+                border: 2px solid rgba(255, 255, 255, 0.2);
+                border-radius: 10px;
+                padding: 15px;
+                transition: all 0.2s ease;
+            }
+
+            #backWrap {
+                display: flex;
+                justify-content: center;
+            }
+
+            #backBTN:hover {
+                transform: scale(80%);
+                cursor: pointer;
+            }
+
+        </style>
+    </head>
+
+    <body>
+
+        <div class="topBar">
+            <div class="brand">|
+                <img src="SKILLBLOOM.png" width="40px" height="auto">
+                <span>SkillBloom | </span>
+            </div>
+            <a href="home.html" class="home">Home</a>
+            <a href="" class="courses">Suggested Courses</a>
+            <a href="" class="mycourses">My Courses</a>
+            <a href="contributions.html" class="contributions">Contributions</a>
+
+            <div class="account">
+                <button id="welcome" onclick="document.querySelector('.account-menu').style.display = 'flex'">Account</button>
+                
+                <div class="account-menu">
+                    <a href="log-out.html" id="logOut">Log Out</a>
+                    <button onclick="document.querySelector('.account-menu').style.display = 'none'">Close</button>
+                </div>
+                
+            </div>
+        </div>
+
+        <div id="courseInfo">
+        <h1 id="courseName"></h1>
+        <p id="courseHeading"></p>
+        <p id="topic"></p>
+        <p id="courseDesc"></p>
+        <p id="learningTime"></p>
+        <p id="itemsNeeded"></p>
+        <p id="category"></p>
+        <hr>
+        </div>
+
+        <div id="stagesContainer"></div>
+        <div id="backWrap">
+        <button id="backBTN" onclick="window.location.replace('courses.html')">Back</button>
+        </div>
+        <br><br>
+
+        <script>
+            const params = new URLSearchParams(window.location.search);
+
+            const userId = params.get("userId");
+            const skillId = params.get("skillId");
+
+            fetch("/skills")
+            .then(response => response.json())
+            .then(skills => {
+                const skill = skills[userId][skillId];
+
+                const name = document.getElementById("courseName");
+                const heading = document.getElementById("courseHeading");
+                const desc = document.getElementById("courseDesc");
+                const learningTime = document.getElementById("learningTime");
+                const itemsNeeded = document.getElementById("itemsNeeded");
+                const category = document.getElementById("category");
+                const stagesContainer = document.getElementById("stagesContainer");
+                const topic = document.getElementById("topic");
+
+                name.textContent = skill.name;
+                heading.textContent = skill.heading;
+                desc.textContent = skill.description;
+                learningTime.textContent = "------ " + skill.learningTime + " -----";
+                itemsNeeded.textContent = "Items Needed: " + skill.itemsNeeded;
+                category.textContent = skill.category;
+                topic.textContent = skill.topic;
+
+                for (const stage of skill.stages) {
+                    const stageCard = document.createElement("div");
+                    stageCard.innerHTML = `
+                        <div id="stageDetails">
+                        <h2 class="stageText">Stage ${stage.number}: ${stage.title}</h2>
+                        <p class="stageText">${stage.description}</p><br>
+                        ${stage.attachment ? `<a id="stageAttchLink" href="${stage.attachment}" target="_blank">Open Attachment</a>` : ""}
+                        </div> <br> <hr> <br>`;
+                    
+                    stagesContainer.appendChild(stageCard);
+
+                }
+            })
+        </script>
+    </body>
+
+</html>

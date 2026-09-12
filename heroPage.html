@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+        <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+        <title>SkillBloom | Design Championship 2026</title>
+
+        <style>
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+
+            body {
+                background-color: #080612;
+                background-image: 
+                    radial-gradient(circle at 15% 20%, rgba(124, 58, 237, 0.18) 0%, transparent 40%),
+                    radial-gradient(circle at 85% 75%, rgba(6, 182, 212, 0.15) 0%, transparent 40%),
+                    radial-gradient(circle at 50% 50%, rgba(15, 23, 42, 0.5) 0%, transparent 100%);
+                min-height: 100vh;
+                width: 100%;
+                overflow: hidden;
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .title {
+                color: white;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                margin: 10px;
+                margin-top: 100px;
+                row-gap: 7px;
+            }
+
+            .heading {
+                background: linear-gradient(45deg, #ff007f, #7f00ff);
+                -webkit-background-clip: text;
+                background-clip: text;
+                -webkit-text-fill-color: transparent;
+                font-weight: bolder;
+            }
+
+            .badge {
+                color: rgba(255, 255, 255, 0.55);
+                font-size: 12px;
+                font-weight: 600;
+                letter-spacing: 2px;
+                margin-bottom: 18px;
+            }
+
+            .description {
+                margin: 14px;
+                color: white;
+                font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            }
+
+            a {
+                text-decoration: none;
+                font-weight: bold;
+                background: linear-gradient(45deg, #002fff, #01ffc0);
+                -webkit-background-clip: text;
+                background-clip: text;
+                -webkit-text-fill-color: transparent;
+                font-size: 25px;
+                margin-left: 14px;
+            }
+
+            @view-transition {
+                navigation: auto;
+            }
+
+            .heading:hover {
+                transform: scale(1.03);
+            }
+
+            h2:hover {
+                transform: scale(1.03);
+            }
+
+            * {
+                transition: all 0.2s ease;
+            }
+
+            .description:hover {
+                transform: scale(1.03);
+            }
+
+            .footer {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 42px;
+
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                background: rgba(8, 6, 18, 0.65);
+                backdrop-filter: blur(15px);
+                border-top: 1px solid rgba(255, 255, 255, 0.08);
+
+                color: rgba(255, 255, 255, 0.5);
+                font-size: 13px;
+                letter-spacing: 0.5px;
+            }
+
+            .footer strong {
+                margin-left: 4px;
+                color: white;
+            }
+
+            .rocket {
+                position: absolute;
+                top: 60%;
+                left: 50%;
+                transform: translateX(-50%);
+
+                filter: drop-shadow(0 0 25px rgba(34, 211, 238, 0.35));
+            }
+            
+        </style>
+    </head>
+    <body>
+        <div class="title">
+            <p class="badge" style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">✦ DESIGN CHAMPIONSHIP 2026</p>
+        <h1 class="heading" style="font-size: 50px;">Welcome to SkillBloom</h1>
+        <h2 style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        margin-left: 6px; color: rgba(255, 255, 255, 0.5)"><i>Learn skills. Build things. Bloom.</i></h2>
+        </div>
+
+        <p class="description">
+            Discover new skills, <br>follow structured courses,
+            and turn what you learn into something real.
+        </p>
+
+        <a href="main.html" class="start">
+            Start Learning <i class="bx bx-right-arrow-alt"></i>
+        </a>
+
+        <div class="rocket">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                width="124"
+                height="124"
+                viewBox="0 0 24 24">
+
+            <defs>
+                <linearGradient id="gradient">
+                    <stop offset="0%" stop-color="#7c3aed"/>
+                    <stop offset="100%" stop-color="#22d3ee"/>
+                </linearGradient>
+            </defs>
+
+            <path fill="url(#gradient)"
+                d="M14.59 6.59c-.78.78-.78 2.05 0 2.83s2.05.78 2.83 0 .78-2.05 0-2.83-2.05-.78-2.83 0M5 16c-2 1-2 5-2 5s3 0 5-2z"/>
+
+            <path fill="url(#gradient)"
+                d="M21 2h-3.69c-2.4 0-4.66.94-6.36 2.64L8.69 6.9a8.4 8.4 0 0 0-6.24 1.27c-.25.17-.41.44-.44.73s.08.59.29.81l12 12c.2.2.45.29.71.29s.51-.1.71-.29c1.9-1.9 1.6-5.08 1.38-6.38l2.28-2.28c1.7-1.7 2.64-3.96 2.64-6.36V3c0-.55-.45-1-1-1Zm-1 4.69c0 1.87-.73 3.63-2.05 4.95l-2.66 2.66c-.25.25-.35.61-.26.95.19.79.45 2.78-.17 4.2L4.65 9.24c2.11-.89 3.94-.32 4.03-.29.36.12.76.03 1.02-.24l2.66-2.66A6.96 6.96 0 0 1 17.31 4H20z"/>
+            </svg>
+        </div>
+
+        <div class="footer">
+            Made with ❤️ by  <strong>VisionX</strong>
+        </div>
+    </body>

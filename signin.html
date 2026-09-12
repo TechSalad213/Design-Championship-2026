@@ -1,0 +1,180 @@
+<html>
+    <head>
+        <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+        <title>Login</title>
+        <link rel="preload" as="image" href="background.png">
+
+        <style>
+            body {
+                background-color: #080612;
+                background-image: 
+                    radial-gradient(circle at 30% 30%, rgba(237, 58, 228, 0.18) 0%, transparent 40%),
+                    radial-gradient(circle at 60% 85%, rgba(23, 65, 182, 0.18) 0%, transparent 40%);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                min-height: -100vh;
+            }
+
+            .usercontainer {
+                position: relative;
+            }
+
+            .passcontainer {
+                position: relative;
+            }
+
+            .logtxt {
+                font-size: 16.5px
+            }
+
+            .container {
+                /* background-color: rgba(179, 106, 221, 0.2); */
+                /* backdrop-filter: blur(7px);
+                -webkit-backdrop-filter: blur(7px); */
+                display: flex;
+                flex-direction: column; 
+                min-height: -100vh;
+                row-gap: 20px;
+                padding: 30px 60px;
+                /* border: 2px solid rgba(255, 255, 255, 0.2); */
+                border-radius: 10px;
+                /* box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); */
+
+            }
+
+            @view-transition {
+                navigation: auto;
+            }
+
+            .usercontainer i {
+                position: absolute;
+                right: 15px;
+                top: 50%;
+                transform: translateY(-50%);
+                color: white;
+                font-size: 20px;
+            }
+
+             .passcontainer i {
+                position: absolute;
+                right: 15px;
+                top: 50%;
+                transform: translateY(-50%);
+                color: white;
+                font-size: 20px;
+            }
+
+            .text {
+                background: transparent;
+                border: 2px solid rgba(255, 255, 255, 0.2);
+                padding: 10px 45px 10px 20px;
+                border-radius: 18px;
+                color: white;
+            }
+
+            .text:focus{
+                outline: none !important;
+            }
+
+            img {
+                width: 25%;
+                height: auto
+            }
+
+            .login {
+                background-color: white;
+                color: black;
+                padding: 10px 50px;
+                border: 2px solid transparent;
+                border-radius: 20px;
+                cursor: pointer;
+            }
+
+            .back {
+                background-color: transparent;
+                color: white;
+                padding: 10px 50px;
+                border: 2px solid rgb(255, 255, 255, 0.2);
+                border-radius: 20px;
+                cursor: pointer;
+            }
+
+            .back:hover {
+                background-color: white;
+                color: black;
+            }
+
+            .label {
+                font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+                color: white;
+                font-size: 20px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .label a {
+                text-decoration: none;
+                color: lightblue;
+                font-weight: 800;
+                font-size: medium;
+                cursor: pointer;
+            }
+
+            .text::placeholder{
+                color: white;
+            }
+
+            .container .welclabel {
+                font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+                color: rgb(255, 255, 255);
+                font-size: 30px;
+                font-weight: bold;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- <img src="SKILLBLOOM.png" alt=""SkillBLOOM - A place for You!> -->
+        <div class="container">
+            <label class="welclabel">Join us!</label>
+
+            <div class="usercontainer">
+            <input type="text" placeholder="Username" class="text" id="username"><i class="bx bx-user"></i></div>
+
+            <div class="passcontainer">
+            <input type="password" placeholder="Password" class="text" id="password"><i class="bx bx-lock"></i><br></div>
+            
+            <button class="login" onclick="register()"><span class="logtxt">Register</span></button>
+            <button class="back" onclick="window.location.href='main.html'"><span class="logtxt">Back</span></button>
+        </div>
+
+        <script>
+            async function register() {
+                const username = document.getElementById("username").value;
+                const password = document.getElementById("password").value;
+
+                const response = await fetch("/signup", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        username: username,
+                        password: password
+                    })
+                });
+
+            const result = await response.text();
+
+            if (result === "Sign Up Received!") {
+                window.location.replace("main.html")}
+            else {
+                alert(result);
+            }};
+        </script>
+    </body>
+</html>

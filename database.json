@@ -1,0 +1,37 @@
+{
+  "users": [
+    {
+      "username": "Ashwath Ashok",
+      "salt": "9c9cdf468add2eedb1ca63b195b853cc",
+      "passwordHash": "504aff3bf54d912b980ea15a9751ab69fec28b35ac25410c39b14e2b2ec2bd4139cea0adda2c3319e68e5be79b82d695790a6e1c3575f12b784818ac6fb6f435",
+      "id": "327306c0-0680-423b-8c94-3de16b275fcc"
+    },
+    {
+      "username": "Srinesh Muntha",
+      "salt": "2bdb0687aa197895f52a39ae7e8bbb7f",
+      "passwordHash": "e06f2ac2ae78efc2b96c96164dad8a32de3e2570adc83ba787508a2e3a811a093da316227bd374c2e20379c81635c73c92f0989635fa7184add6625c1bc52dc4",
+      "id": "9734a8aa-df9c-4382-800e-1e2e306b928b"
+    }
+  ],
+  "skills": {
+    "327306c0-0680-423b-8c94-3de16b275fcc": {
+      "9ddc5fe67592": {
+        "name": "ssssss",
+        "heading": "sssssssss",
+        "description": "dddddddddddd",
+        "stages": [
+          {
+            "number": 1,
+            "title": "dddddddddddd",
+            "description": "dddddddddddd",
+            "attachment": null
+          }
+        ],
+        "category": "Music",
+        "learningTime": "ddddddddd",
+        "itemsNeeded": "ddddddddddd",
+        "courseFile": null
+      }
+    }
+  }
+}
